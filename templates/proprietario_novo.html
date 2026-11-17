@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-pro novo
+<h2>Novo Proprietário</h2>
+
+<form method="POST" action="{{ url_for('proprietario_novo')}}">
+
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
+
+    <label>Telefone:</label>
+    <input type="text" name="telefone" required>
+
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
+
+    <label>CPF:</label>
+    <input type="text" name="cpf" required>
+
+    <button type="submit">Salvar</button>
+
+</form>
 
 
 {% endblock %}

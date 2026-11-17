@@ -40,7 +40,7 @@ class Usuario(Base, UserMixin):
     name = Column(String(50), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     senha_hash = Column(String(255), nullable=False)
-    criado_em = Column(DateTime(timezone=True), server_default=func.now())
+    criado_em = Column(DateTime, server_default=func.now())
     # ---------------------
     # Senha
     # ---------------------
@@ -184,15 +184,14 @@ class Carro(Base):
     modelo = Column(String(100), nullable=False)
     placa = Column(String(10), unique=True, nullable=False)
 
+
     proprietario = relationship(
         'Proprietario',
-        back_populates='carros'
-    )
+        back_populates='carros' )
 
     agendamentos = relationship(
         'Agendamento',
-        back_populates='carro'
-    )
+        back_populates='carro' )
 
     proprietario_id = Column(Integer, ForeignKey('proprietarios.id'), nullable=False)
 
@@ -202,6 +201,7 @@ class Agendamento(Base):
     id = Column(Integer, primary_key=True)
     data_hora = Column(DateTime, nullable=False)
     servico = Column(String(100), nullable=False)
+    criado_em = Column(DateTime, server_default=func.now())
 
     carro = relationship(
         'Carro',
