@@ -9,8 +9,7 @@
     Novo Agendamento
 </a>
 
-<table class="table table-bordered table-striped">
-
+<table >
     <thead>
         <tr>
             <th>ID</th>
@@ -18,6 +17,8 @@
             <th>Serviço</th>
             <th>Modelo</th>
             <th>Placa</th>
+            <th>Proprietario</th>
+            <th>email</th>
         </tr>
     </thead>
 
@@ -31,14 +32,17 @@
 
             <td>{{ a.servico }}</td>
 
-            <td>{{ a.carro.modelo }}</td>
+            <td>{{ a.carro_agenda_join.modelo }}</td>
 
-            <td>{{ a.carro.placa }}</td>
+            <td>{{ a.carro_agenda_join.placa }}</td>
+
+            <td>{{ a.carro_agenda_join.proprietario_join.nome }}</td>
+            <td>{{ a.carro_agenda_join.proprietario_join.email }}</td>
         </tr>
 
         {% else %}
         <tr>
-            <td colspan="5" class="text-center">
+            <td >
                 Nenhum agendamento cadastrado.
             </td>
         </tr>

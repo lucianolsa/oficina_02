@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2>Editar Proprietário</h2>
+
+<form method="POST" action="{{ url_for('proprietario_editar', id=proprietario.id ) }}">
+
+    <label>Nome:</label>
+    <input type="text" name="nome" value="{{proprietario.nome}}" >
+
+    <label>Telefone:</label>
+    <input type="text" name="telefone" value="{{proprietario.telefone}}" >
+
+    <label>E-mail:</label>
+    <input type="email" name="email" value="{{proprietario.email}}" >
+
+    <label>CPF atual:[ {{proprietario.cpf_mascarado}} ]</label>
+    <input type="text" name="cpf"  >
+
+
+    <button type="submit">Salvar</button>
+
+</form>
+
+
+{% endblock %}
