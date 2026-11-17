@@ -183,6 +183,7 @@ class Carro(Base):
     id = Column(Integer, primary_key=True)
     modelo = Column(String(100), nullable=False)
     placa = Column(String(10), unique=True, nullable=False)
+    proprietario_id = Column(Integer, ForeignKey('proprietarios.id'), nullable=False)
 
 
     proprietario = relationship(
@@ -193,7 +194,7 @@ class Carro(Base):
         'Agendamento',
         back_populates='carro' )
 
-    proprietario_id = Column(Integer, ForeignKey('proprietarios.id'), nullable=False)
+
 
 
 class Agendamento(Base):
@@ -202,13 +203,13 @@ class Agendamento(Base):
     data_hora = Column(DateTime, nullable=False)
     servico = Column(String(100), nullable=False)
     criado_em = Column(DateTime, server_default=func.now())
-
+    carro_id = Column(Integer, ForeignKey('carros.id'), nullable=False)
     carro = relationship(
         'Carro',
         back_populates='agendamentos'
     )
 
-    carro_id = Column(Integer, ForeignKey('carros.id'), nullable=False)
+
 
 
 

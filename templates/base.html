@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+    {% if current_user.is_authenticated %}
     <nav class="navbar navbar-dark bg-dark p-3">
         <div class="container">
 
@@ -31,6 +31,7 @@
 
         </div>
     </nav>
+    {% endif %}
 
     <div class="container mt-3">
 {% if current_user.is_authenticated %}

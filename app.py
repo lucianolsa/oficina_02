@@ -33,6 +33,7 @@ def login():
         senha = request.form.get('senha')
 
         usuario = db_session.execute(select(Usuario).where(Usuario.email == email)).scalar()
+        print("hga",usuario,email,senha)
 
         if usuario and usuario.check_password(senha):
             session.permanent = True
@@ -52,21 +53,19 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/')
-
+@login_required
 def dashboard():
     # Renderiza tela com links para Produtos e Estoque e mostra current_user.nome (5.1.1)
     return render_template('dashboard.html')
 
 @app.route('/carro/novo', methods=['GET', 'POST'])
-
+@login_required
 def carro_novo():
-
     proprietarios = db_session.execute(
         select(Proprietario)
     ).scalars().all()
 
     if request.method == 'POST':
-
         modelo = request.form.get('modelo')
         placa = request.form.get('placa')
         proprietario_id = request.form.get('proprietario_id')
@@ -95,14 +94,18 @@ def carro_novo():
     )
 
 @app.route('/proprietario', methods=['GET'])
+@login_required
 def proprietario():
     proprietarios = db_session.execute(
         select(Proprietario)
     ).scalars().all()
 
-    return render_template('proprietario.html',proprietarios=proprietarios)
+    return render_template(
+        'proprietario.html',
+        proprietarios=proprietarios)
 
 @app.route('/proprietario/novo', methods=['GET', 'POST'])
+@login_required
 def proprietario_novo():
     if request.method == 'POST':
         nome = request.form['nome']
@@ -137,6 +140,7 @@ def proprietario_novo():
     return render_template('proprietario_novo.html')
 
 @app.route('/agendamentos', methods=['GET'])
+@login_required
 def agendamentos():
     agendamentos = db_session.execute(
         select(Agendamento)
@@ -145,6 +149,7 @@ def agendamentos():
     return render_template('agendamentos.html', agendamentos=agendamentos)
 
 @app.route('/agendamentos/novo', methods=['GET', 'POST'])
+@login_required
 def agendamento_novo():
     if request.method == 'POST':
         carro_id = request.form.get('carro_id')
