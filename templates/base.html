@@ -92,6 +92,15 @@
             </div>
 
         </div>
+    </nav>
+    {% endif %}
+
+    <div class="container mt-3">
+{% if current_user.is_authenticated %}
+        <div class="text-end mb-3">
+            Olá, {{ current_user.name }}
+            <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm">Sair</a>
+        </div>
 
 
 
@@ -102,7 +111,7 @@
 {% endif %}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% for categoria, mensagem in messages %}
-                <div class="alert alert-{{ categoria }}" style="font-size: 20px;">
+                <div class="alert alert-{{ categoria }}">
                     {{ mensagem }}
                 </div>
             {% endfor %}

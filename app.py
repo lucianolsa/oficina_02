@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from sqlalchemy import select,extract
+from sqlalchemy import select
 from datetime import timedelta,datetime
 
 from models import db_session, Usuario, Proprietario, Carro,Agendamento
@@ -92,7 +92,7 @@ def carro_novo():
         proprietarios=proprietarios
     )
 
-@app.route('/proprietario', methods=['GET','POST'])
+@app.route('/proprietario', methods=['GET'])
 @login_required
 def proprietario():
     termo = request.form.get('busca','')
@@ -192,7 +192,7 @@ def proprietario_editar(id):
 @login_required
 def agendamentos():
     agendamentos = db_session.execute(
-        select(Agendamento).order_by( extract('day', Agendamento.data_hora).desc())
+        select(Agendamento)
     ).scalars().all()
 
     return render_template('agendamentos.html', agendamentos=agendamentos)

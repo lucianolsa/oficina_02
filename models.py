@@ -1,4 +1,3 @@
-import flask_login
 from sqlalchemy import (
     create_engine, Column, Integer, String, DateTime, ForeignKey, select, Date)
 from sqlalchemy.sql import func
