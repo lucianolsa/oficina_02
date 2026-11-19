@@ -6,21 +6,25 @@ usuarios = [
     {"nome": "Pedro Santos", "email": "pedro.santos@example.com"}
 ]
 proprietarios = [
-        {"nome": "Felipe1 Nascimento","email": "felipe.nascimento1@example.com",
-        "telefone": "11900000009","cpf": "987.654.321-00",},
-        {"nome": "Camila Barbosa","email": "camila.barbosa@example.com",
-        "telefone": "11900000004","cpf": "28651581860" },
+
+    {"nome": "Gabriel Martins", "email": "gabriel.martins@example.com",
+     "telefone": "11900000001", "cpf": "123.456.789-09"},
+    {"nome": "Juliana Almeida", "email": "juliana.almeida@example.com",
+     "telefone": "11900000002", "cpf": "390.533.447-05"},
+    {"nome": "Rafael Rodrigues", "email": "rafael.rodrigues@example.com",
+     "telefone": "11900000003", "cpf": "935.411.347-80"},
+    {"nome": "Felipe Nascimento", "email": "felipe.nascimento@example.com",
+     "telefone": "11900000005", "cpf": "168.995.350-09"},
+    {"nome": "João M. O. Andrade", "email": "jm.andrade@example.com",
+     "telefone": "11900000009", "cpf": "987.654.321-00"},
+    {"nome": "Camila Barbosa", "email": "camila.barbosa@example.com",
+     "telefone": "11900000004", "cpf": "111.444.777-35" },
+    {"nome": "Ana Barbosa", "email": "ana.barbosa@example.com",
+     "telefone": "11900000004", "cpf": "529.982.247-25" }
 
 ]
 """
-{"nome": "Gabriel Martins","email": "gabriel.martins@example.com",
-        "telefone": "11900000001","cpf": "123.456.789-09"},
-        {"nome": "Juliana Almeida","email": "juliana.almeida@example.com",
-        "telefone": "11900000002","cpf": "390.533.447-05"},
-    {"nome": "Rafael Rodrigues","email": "rafael.rodrigues@example.com",
-        "telefone": "11900000003","cpf": "93541134780"},
-    {"nome": "Felipe Nascimento","email": "felipe.nascimento@example.com",
-        "telefone": "11900000005","cpf": "168.995.350-09"},
+
     
     
     """
@@ -47,7 +51,7 @@ def criar_proprietarios():
         )
         print(pro_.nome, pro_.email, pro_.telefone, p['cpf'])
         pro_.set_cpf(p['cpf'])
-        print(pro_.nome, pro_.email, pro_.telefone)
+        #print(pro_.nome, pro_.email, pro_.telefone)
 
         db_session.add(pro_)
         db_session.commit()

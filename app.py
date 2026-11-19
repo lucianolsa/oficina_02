@@ -2,11 +2,15 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from sqlalchemy import select,extract
 from datetime import timedelta,datetime
-
+from dotenv import load_dotenv
 from models import db_session, Usuario, Proprietario, Carro,Agendamento
+import os
 
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'SECRET_KEY'
+app.config['SECRET_KEY'] = SECRET_KEY
 
 # Tempo máximo de login: 30 minutos
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
@@ -56,6 +60,23 @@ def logout():
 def dashboard():
     # Renderiza tela com links para Produtos e Estoque e mostra current_user.nome (5.1.1)
     return render_template('dashboard.html')
+
+@app.route('/carro', methods=['GET', 'POST'])
+@login_required
+def carro():
+    termo = request.form.get('busca','')
+    if termo:
+        busca_carros = (select(Carro)
+                         .where(Carro.placa.ilike(f'%{termo}%')))
+
+    else:
+        busca_carros = select(Carro)
+    carros= db_session.execute(busca_carros).scalars().all()
+
+    return render_template(
+        'carros.html',
+        carros=carros)
+
 
 @app.route('/carro/novo', methods=['GET', 'POST'])
 @login_required
@@ -193,8 +214,9 @@ def proprietario_editar(id):
 def agendamentos():
     agendamentos = db_session.execute(
         select(Agendamento).order_by(
-            extract('day', Agendamento.data_hora).desc())
+            extract('month', Agendamento.data_hora).asc())
     ).scalars().all()
+    print(agendamentos)
 
     return render_template('agendamentos.html', agendamentos=agendamentos)
 
