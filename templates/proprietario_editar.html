@@ -6,13 +6,13 @@
 <form method="POST" action="{{ url_for('proprietario_editar', id=proprietario.id ) }}">
 
     <label>Nome:</label>
-    <input type="text" name="nome" value="{{proprietario.nome}}" >
+    <input type="text" name="nome" value="{{proprietario.nome}}" required >
 
     <label>Telefone:</label>
-    <input type="text" name="telefone" value="{{proprietario.telefone}}" >
+    <input type="text" name="telefone" value="{{proprietario.telefone}}" required >
 
     <label>E-mail:</label>
-    <input type="email" name="email" value="{{proprietario.email}}" >
+    <input type="email" name="email" value="{{proprietario.email}}" required >
 
     <label>CPF atual:[ {{proprietario.cpf_mascarado}} ]</label>
     <input type="text" name="cpf"  >

@@ -18,7 +18,8 @@
             <th>Modelo</th>
             <th>Placa</th>
             <th>Proprietario</th>
-            <th>email</th>
+            <th>Email</th>
+            <th>Ações</th>
         </tr>
     </thead>
 
@@ -27,17 +28,13 @@
         {% for a in agendamentos %}
         <tr>
             <td>{{ a.id }}</td>
-
             <td>{{ a.data_hora.strftime('%d/%m/%Y %H:%M') }}</td>
-
             <td>{{ a.servico }}</td>
-
             <td>{{ a.carro_agenda_join.modelo }}</td>
-
             <td>{{ a.carro_agenda_join.placa }}</td>
-
             <td>{{ a.carro_agenda_join.proprietario_join.nome }}</td>
             <td>{{ a.carro_agenda_join.proprietario_join.email }}</td>
+            <td><a href="{{ url_for('agendamento_atualizar', id = a.id) }}">Atualizar</a></td>
         </tr>
 
         {% else %}

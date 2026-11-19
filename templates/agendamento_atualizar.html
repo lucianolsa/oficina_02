@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h2>Atualizar Agendamento</h2>
+
+<form method="POST" action="{{ url_for('agendamento_atualizar', id = agendamento.id) }}">
+
+    <label>Carro:{{ agendamento.carro_agenda_join.modelo }}</label>
+    <label>Placa:{{ agendamento.carro_agenda_join.placa }}</label>
+    <label>Data e Hora:{{ agendamento.data_hora }} </label>
+
+
+    <br><br>
+
+
+    <label>Data e Hora:</label>
+    <input type="datetime-local" name="data_hora" value="{{ agendamento.data_hora }}" required>
+
+    <br><br>
+
+
+
+    <button type="submit">Atualizar</button>
+
+</form>
+
+{% endblock %}
