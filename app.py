@@ -25,7 +25,6 @@ login_manager.login_message_category = "warning"
 def load_user(user_id):
     return db_session.get(Usuario, int(user_id))
 
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
