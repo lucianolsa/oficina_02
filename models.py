@@ -40,7 +40,7 @@ class Usuario(Base, UserMixin):
     name = Column(String(50), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     senha_hash = Column(String(255), nullable=False)
-    criado_em = Column(DateTime(timezone=True), server_default=func.now())
+    criado_em = Column(DateTime, server_default=func.now())
     # ---------------------
     # Senha
     # ---------------------
@@ -67,9 +67,9 @@ class Proprietario(Base):
     criado_em = Column( DateTime, server_default=func.now()
     )
 
-    carros = relationship(
+    carros_join = relationship(
         'Carro',
-        back_populates='proprietario'
+        back_populates='proprietario_join'
     )
 
     # ==========================================
@@ -146,6 +146,7 @@ class Proprietario(Base):
         if not Proprietario.validar_formato_cpf(cpf):
             raise ValueError("CPF inválido")
 
+
         self.cpf_hash = Proprietario.gerar_hash_cpf(cpf)
 
         self.cpf_criptografado = (Proprietario.criptografar_cpf(cpf)
@@ -176,6 +177,12 @@ class Proprietario(Base):
             hash_informado
         )
 
+    def __repr__(self):
+        return (
+            f'nome:{self.nome} - '
+        )
+
+
 
 class Carro(Base):
     __tablename__ = 'carros'
@@ -183,18 +190,18 @@ class Carro(Base):
     id = Column(Integer, primary_key=True)
     modelo = Column(String(100), nullable=False)
     placa = Column(String(10), unique=True, nullable=False)
-
-    proprietario = relationship(
-        'Proprietario',
-        back_populates='carros'
-    )
-
-    agendamentos = relationship(
-        'Agendamento',
-        back_populates='carro'
-    )
-
     proprietario_id = Column(Integer, ForeignKey('proprietarios.id'), nullable=False)
+
+
+    proprietario_join = relationship(
+        'Proprietario',
+        back_populates='carros_join' )
+
+    agendamentos_join = relationship(
+        'Agendamento',
+        back_populates='carro_agenda_join' )
+
+
 
 
 class Agendamento(Base):
@@ -202,13 +209,15 @@ class Agendamento(Base):
     id = Column(Integer, primary_key=True)
     data_hora = Column(DateTime, nullable=False)
     servico = Column(String(100), nullable=False)
+    criado_em = Column(DateTime, server_default=func.now())
+    carro_id = Column(Integer, ForeignKey('carros.id'), nullable=False)
 
-    carro = relationship(
+    carro_agenda_join = relationship(
         'Carro',
-        back_populates='agendamentos'
+        back_populates='agendamentos_join'
     )
 
-    carro_id = Column(Integer, ForeignKey('carros.id'), nullable=False)
+
 
 
 

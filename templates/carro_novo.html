@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-carro novo
-
 <h2>Cadastrar Carro</h2>
-<!-- Critério 6.1: Inserção associando a um proprietário -->
+
 <form method="POST">
     <label>Proprietário:</label><br>
     <select name="proprietario_id" required>
@@ -18,5 +16,4 @@ carro novo
     <input type="text" name="placa" required><br><br>
     <button type="submit">Cadastrar Carro</button>
 </form>
-{% endblock %}
 {% endblock %}
