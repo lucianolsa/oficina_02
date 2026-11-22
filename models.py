@@ -191,6 +191,7 @@ class Carro(Base):
     modelo = Column(String(100), nullable=False)
     placa = Column(String(10), unique=True, nullable=False)
     proprietario_id = Column(Integer, ForeignKey('proprietarios.id'), nullable=False)
+    criado_em = Column(DateTime, server_default=func.now())
 
 
     proprietario_join = relationship(
@@ -211,6 +212,7 @@ class Agendamento(Base):
     servico = Column(String(100), nullable=False)
     criado_em = Column(DateTime, server_default=func.now())
     carro_id = Column(Integer, ForeignKey('carros.id'), nullable=False)
+    criado_em = Column(DateTime, server_default=func.now())
 
     carro_agenda_join = relationship(
         'Carro',

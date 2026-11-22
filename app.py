@@ -213,7 +213,7 @@ def proprietario_editar(id):
 def agendamentos():
     agendamentos = db_session.execute(
         select(Agendamento).order_by(
-            extract('month', Agendamento.data_hora).asc())
+            extract('day', Agendamento.data_hora).asc())
     ).scalars().all()
     print(agendamentos)
 

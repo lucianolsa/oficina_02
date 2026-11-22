@@ -1,6 +1,7 @@
 from models import db_session,Usuario, Proprietario
 
 usuarios = [
+    {"nome": "admin", "email": "adm@example.com"},
     {"nome": "João Silva", "email": "joao.silva@example.com"},
     {"nome": "Maria Oliveira", "email": "maria.oliveira@example.com"},
     {"nome": "Pedro Santos", "email": "pedro.santos@example.com"}
@@ -41,7 +42,7 @@ def criar_usuarios():
         db_session.add(admin)
         db_session.commit()
         print("criado com sucesso!!!")
-#criar_usuarios()
+
 def criar_proprietarios():
     for p in proprietarios:
         pro_ = Proprietario(
@@ -58,3 +59,4 @@ def criar_proprietarios():
         print("criado com sucesso!!!")
 
 criar_proprietarios()
+criar_usuarios()
