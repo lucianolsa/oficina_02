@@ -208,6 +208,33 @@ def proprietario_editar(id):
         proprietario=proprietario
     )
 
+@app.route('/proprietario/excluir/<int:id>', methods=['POST'])
+@login_required
+def proprietario_excluir(id):
+    proprietario = db_session.get(Proprietario, id)
+
+    if not proprietario:
+        flash('Proprietário não encontrado!', 'danger')
+        return redirect(url_for('proprietario'))
+
+    # Verifica se o tutor possui animais
+    if proprietario.carros_join:
+        flash('Não é possível excluir este proprietário, pois ele possui carros cadastrados!', 'warning')
+        return redirect(url_for('proprietario'))
+
+    try:
+        db_session.delete(proprietario)
+        db_session.commit()
+
+        flash('Proprietário excluído com sucesso!', 'success')
+
+    except Exception as e:
+        db_session.rollback()
+        print(e)
+        flash('Erro ao excluir proprietário!', 'danger')
+
+    return redirect(url_for('proprietario'))
+
 @app.route('/agendamentos', methods=['GET'])
 @login_required
 def agendamentos():

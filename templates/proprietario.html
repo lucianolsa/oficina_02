@@ -33,7 +33,16 @@
         <td>{{ p.telefone }}</td>
         <td>{{ p.email }}</td>
         <td>{{ p.cpf_mascarado }}</td>
-        <td><a href="{{url_for('proprietario_editar',id = p.id)}}">Editar</a></td>
+        <td><a href="{{url_for('proprietario_editar',id = p.id)}}">Editar</a>
+        <form action="{{ url_for('proprietario_excluir', id=p.id) }}"
+      method="POST"
+      onsubmit="return confirm('Tem certeza que deseja excluir este proprietário?')">
+
+    <button type="submit" class="btn btn-danger">
+        Excluir
+    </button>
+
+</form></td>
     </tr>
     {% endfor %}
 
