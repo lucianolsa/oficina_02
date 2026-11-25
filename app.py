@@ -47,7 +47,6 @@ def login():
 
     return render_template('login.html')
 
-
 @app.route('/logout')
 @login_required
 def logout():
@@ -101,7 +100,7 @@ def carro_novo():
 
             flash('Carro cadastrado com sucesso!', 'success')
 
-            return redirect(url_for('carro_novo'))
+            return redirect(url_for('carro'))
 
         except Exception:
             db_session.rollback()

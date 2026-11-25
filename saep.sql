@@ -1,4 +1,4 @@
-create table main.proprietarios
+create table proprietarios
 (
     id                INTEGER      not null
         primary key,
@@ -12,7 +12,7 @@ create table main.proprietarios
     criado_em         DATETIME default CURRENT_TIMESTAMP
 );
 
-create table main.carros
+create table carros
 (
     id              INTEGER      not null
         primary key,
@@ -20,23 +20,21 @@ create table main.carros
     placa           VARCHAR(10)  not null
         unique,
     proprietario_id INTEGER      not null
-        references main.proprietarios
+        references proprietarios
 );
 
-create table main.agendamentos
+create table agendamentos
 (
     id        INTEGER      not null
         primary key,
     data_hora DATETIME     not null,
     servico   VARCHAR(100) not null,
+    criado_em DATETIME default CURRENT_TIMESTAMP,
     carro_id  INTEGER      not null
-        references main.carros,
-    criado_em DATETIME default CURRENT_TIMESTAMP
+        references carros
 );
 
-
-
-create table main.usuarios
+create table usuarios
 (
     id         INTEGER      not null
         primary key,
